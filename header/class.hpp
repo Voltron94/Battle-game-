@@ -13,7 +13,7 @@ class Player
         virtual void classInfo();
 
     //Condition
-        bool playTurn(bool turn){ return turn;}  //For versus mode
+        // bool playTurn(bool turn){ return turn;}  //For versus mode
 
     //getter
         std::string getName() {return name;}

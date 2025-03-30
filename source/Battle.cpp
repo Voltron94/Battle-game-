@@ -38,30 +38,30 @@ void Battle::mobInfo()
 
 //Action
 
-bool Battle::mobDefAction()
+void Battle::plDefAction()
 {
-    canPlAtk = false;
-    return canPlAtk;
+    std::cout << "Def action" << "\n";
+    enCanAtk = false;   //the ennemy can't attack
 }
 
 void Battle::attackAction(int ennemyDef)
 {
-    if(canPlAtk){ //The ennemy use defend action ? 
+    if(plCanAtk){ //The Player can attack ? 
         //init
         int playerDamage = player1 ->getAttack();
-        int ennemyDef = ennemy1 ->getDefense();
 
-        int FinalDef = ennemyDef % 45;
-        int finalDamage = playerDamage - FinalDef;
+        int FinalDef = ennemyDef / 3; //Player def application
+        int randomAdd = (std::rand() % (14 - (-14) + 1)) + (-14); //int randomValue = (std::rand() % (max - min + 1)) + min; // range : -14 to 14
+        int finalDamage = (playerDamage + randomAdd) - FinalDef; 
         ennemy1 ->takeDamage(finalDamage);
 
-        canPlAtk = true;//attack condition, reset
+        plCanAtk = true;//attack condition, reset
         std::this_thread::sleep_for(std::chrono::seconds(1));
     } else
     {
-        std::cout << ennemy1 ->getName() << " Defense Action are used,ennemy take 0 damage" << std::endl;
+        std::cout << ennemy1 ->getName() << " use the defense action ! He take 0 damage " << "\n"; 
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        canPlAtk = true;
+        plCanAtk = true;
     }
 }
 
@@ -71,25 +71,31 @@ void Battle::mobTurn()
     std::this_thread::sleep_for(std::chrono::seconds(1));
                 //Mob Attack
         //init
-    int playerDamage = player1 ->getAttack();
+    int ennemyDamage = ennemy1 ->getAttack();
     int PlayerDef = player1 ->getDefense();
 
-    int FinalDef = PlayerDef % 45;
-    int finalDamage = playerDamage - FinalDef;
+    int FinalDef = PlayerDef / 3;   //Player def application
+    int randomAdd = (std::rand() % (14 - (-14) + 1)) + (-14); // range : -14 to 14
+    int finalDamage = (ennemyDamage + randomAdd) - FinalDef;
 
 
     std::srand(std::time(0));
-    int randomAtk  = (std::rand()  % 3) + 1; // range : 1 - 3
+    int randomAction  = (std::rand()  % 2) + 1; // int randomValue = (std::rand() % (max - min + 1)) + min; 
 
-    switch (randomAtk)
+    switch (randomAction)
     {
     case 1:
-        std::cout << "Mob Attack" << std::endl;
-        player1 ->takeDamage(finalDamage);
+        if(enCanAtk){
+            std::cout << "Mob Attack" << std::endl;
+            player1 ->takeDamage(finalDamage);
+        }else{
+            std::cout << player1 ->getName() << " use the defense action ! He take 0 damage " << "\n";
+            enCanAtk = true;
+        }
         break;
     case 2:
         std::cout << "Def Action \n";
-        mobDefAction();
+        plCanAtk = false;
         break;
     case 3:
         std::cout << "Use skill : coming soon \n";
@@ -111,6 +117,9 @@ void Battle::executionTurn(int choice)
     case 1:
         attackAction(ennemy1 ->getDefense());
         break;
+    case 2:
+        plDefAction();
+        break;
     
     default:
         std::cout << "Wrong choice, fail number" 
@@ -131,7 +140,7 @@ void Battle::startOne()
 
     while (ennemy1 ->getHealth() > 0 && player1 ->getHealth() > 0)  //if one of the two is dead, end of loop
     {
-        //First fight Action 
+        //Bot Action 
         mobTurn();
         std::this_thread::sleep_for(std::chrono::seconds(1));
         system("cls");
@@ -140,18 +149,18 @@ void Battle::startOne()
         playerInfo1();
         mobInfo();
 
-        //Get Player Action
+        //Player Action
         std::cout << "Action:   1. Attack   2. Defense   3. Use skill   4. Run  " << "\n";
         int choice = game.getPlayerChoice();
-        executionTurn(choice);
+        executionTurn(choice);  //for player
        
         system("cls");  
     }
     
     if (ennemy1->getHealth() <= 0) {
-        std::cout << "Le monstre est vaincu !" << std::endl;
+        std::cout << "Win ! You beat the monster !" << std::endl;
     } else if (player1->getHealth() <= 0) {
-        std::cout << "Vous avez perdu le combat..." << std::endl;
+        std::cout << "Game over..." << std::endl;
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(2));

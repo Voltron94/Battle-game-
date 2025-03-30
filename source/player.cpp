@@ -15,15 +15,12 @@ Rider::Rider(const std::string& _name) : Player(_name, 165, 144, 70, 99, "Rider"
 Saber::Saber(const std::string& _name) : Player(_name, 185, 161, 80, 75, "Saber") {}
 
 //Player 
-
 void Player::classInfo()    //Original virtual fonction info for Player
 {
     std::cout << "Information Error" << std::endl;
 }
 
 //Berserker
-
-
 void Berserker::classInfo()
 {
     std::cout << "\nClasse: " << playerClass 
@@ -34,7 +31,6 @@ void Berserker::classInfo()
 }
 
 //Saber
-
 void Saber::classInfo()
 {
     std::cout << "\nClasse: " << playerClass 
@@ -45,7 +41,6 @@ void Saber::classInfo()
 }
 
 //Rider
-
 void Rider::classInfo()
 {
     std::cout << "\nClasse: " << playerClass 

@@ -10,16 +10,14 @@ class Mob
         Mob() = delete;
         Mob(const std::string& MobName, int health, int attack, int defense, int speed);
 
-        //getter
+    //getter
         std::string getName() {return MobName;}
         int getHealth(){return health;}
         int getMaxHealth(){return maxHealth;}
         int getAttack(){return attack;}
         int getDefense(){return defense;}
         int getSpeed(){return speed;}
-
-        //Action
-
+     //Action
         void takeDamage(int damage){ health -= damage;}
 
     

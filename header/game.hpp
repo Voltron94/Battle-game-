@@ -17,7 +17,7 @@ class Game
         std::unique_ptr <Player> playerCreation(std::string playerName, int playerNB);    //Player* playerCreation(std::string playerName);
         std::unique_ptr <Mob> ennemyCreation();
         std::string getPlayerName();
-
+        
     //Différent type de jeux
         void modeOne();     //mode game 1, init 
         

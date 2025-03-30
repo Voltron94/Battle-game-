@@ -16,10 +16,12 @@ class Battle
         std::unique_ptr<Player> player2;
         std::unique_ptr<Mob> ennemy1;
 
-        //Battle Action
+        //Player Action
         void executionTurn(int choice);
         void attackAction(int ennemyDef);
-        bool mobDefAction();
+        void plDefAction();
+
+        //MobAction
         void mobTurn();
 
 
@@ -33,7 +35,8 @@ class Battle
         void mobInfo(); 
 
     private:
-        bool canPlAtk; //Boolean, use for the defense action
+        bool plCanAtk; //Boolean, player can use the attack action ?
+        bool enCanAtk; //Mob can attack ?
 };
 
 
