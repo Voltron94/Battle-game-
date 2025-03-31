@@ -1,5 +1,5 @@
-#ifndef _Mob_
-    #define _Mob_
+#ifndef _MOB_
+    #define _MOB_
 
 #include <string>
 

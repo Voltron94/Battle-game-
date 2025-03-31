@@ -1,6 +1,6 @@
 #include <iostream>
 #include <memory>
-#include "D:/Code/Code/C++/Projet/battle_game/header/class.hpp"
+#include "D:/Code/Code/C++/Projet/battle_game/header/player.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/game.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/Mob.hpp"
 

@@ -2,7 +2,7 @@
 #include <memory>
 #include <chrono>
 #include <thread>
-#include "D:/Code/Code/C++/Projet/battle_game/header/class.hpp"
+#include "D:/Code/Code/C++/Projet/battle_game/header/player.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/game.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/mob.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/Battle.hpp"
@@ -23,6 +23,18 @@ void Battle::playerInfo1()
               << "\nAttack: " << player1->getAttack() 
               << "\nDefense: " << player1->getDefense()
               << "\nSpeed: " << player1->getSpeed() << std::endl;
+}
+
+void Battle::playerInfo2()
+{
+    std::cout << "================================================================" << std::endl;
+    std::cout << "\nNom : " << player2 ->getName()
+              << "\nClasse: " << player2->getPlayerClass() 
+              << "\nVHealth: " << player2->getHealth() << "/" << player2->getMaxHealth()
+              << "\nAttack: " << player2->getAttack() 
+              << "\nDefense: " << player2->getDefense()
+              << "\nSpeed: " << player2->getSpeed() << std::endl;
+    std::cout << "================================================================" << std::endl;
 }
 
 void Battle::mobInfo()
@@ -46,7 +58,7 @@ void Battle::plDefAction()
 
 void Battle::attackAction(int ennemyDef)
 {
-    if(plCanAtk){ //The Player can attack ? 
+    if(pl1CanAtk){ //The Player can attack ? 
         //init
         int playerDamage = player1 ->getAttack();
 
@@ -55,13 +67,13 @@ void Battle::attackAction(int ennemyDef)
         int finalDamage = (playerDamage + randomAdd) - FinalDef; 
         ennemy1 ->takeDamage(finalDamage);
 
-        plCanAtk = true;//attack condition, reset
+        pl1CanAtk = true;//attack condition, reset
         std::this_thread::sleep_for(std::chrono::seconds(1));
     } else
     {
         std::cout << ennemy1 ->getName() << " use the defense action ! He take 0 damage " << "\n"; 
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        plCanAtk = true;
+        pl1CanAtk = true;
     }
 }
 
@@ -95,7 +107,7 @@ void Battle::mobTurn()
         break;
     case 2:
         std::cout << "Def Action \n";
-        plCanAtk = false;
+        pl1CanAtk = false;
         break;
     case 3:
         std::cout << "Use skill : coming soon \n";
@@ -105,38 +117,98 @@ void Battle::mobTurn()
         break;
     }
 
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::this_thread::sleep_for(std::chrono::milliseconds(750));
 }
 
 //Other
 
 void Battle::executionTurn(int choice)
 {
-    switch (choice)
+    if(mode1 == true)   //Mode 1
     {
-    case 1:
-        attackAction(ennemy1 ->getDefense());
-        break;
-    case 2:
-        plDefAction();
-        break;
-    
-    default:
-        std::cout << "Wrong choice, fail number" 
-        << "\nAuto skip your turn" 
-        << "\nPlease enter valide number the next time" << std::endl;
-        for(int i = 0; i < 4; i++)
+        switch (choice)
         {
-            std::cout << 3 - i << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+        case 1:
+            attackAction(ennemy1 ->getDefense());
+            break;
+        case 2:
+            plDefAction();
+            break;
+        case 3:
+            std::cout << "Coming soon" << std::endl;
+            break;
+    
+        default:
+            std::cout << "Wrong choice, fail number" 
+            << "\nAuto skip your turn" 
+            << "\nPlease enter valide number the next time" << std::endl;
+            for(int i = 0; i < 4; i++)
+            {
+                std::cout << 3 - i << std::endl;
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+            }
+            break;
         }
-        break;
     }
+
+    if(mode2 == true)
+    {
+        if(player1Turn == true)
+        {
+            switch (choice)
+            {
+                case 1:
+                    std::cout << "attackAction 1\n";
+                    break;
+                case 2:
+                    std::cout << "Defense Action \n";
+                    break;
+                default:
+                    std::cout << "Wrong choice, fail number" 
+                    << "\nAuto skip your turn" 
+                    << "\nPlease enter valide number the next time" << std::endl;
+                    for(int i = 0; i < 4; i++)
+                    {
+                        std::cout << 3 - i << std::endl;
+                        std::this_thread::sleep_for(std::chrono::seconds(1));
+                    }
+                    break;
+            }
+        }
+        else if(player2Turn == true)
+        {
+            switch (choice)
+            {
+                case 1:
+                    std::cout << "attackAction 2\n";
+                    break;
+                case 2:
+                    std::cout << "Defense Action \n";
+                    break;
+                default:
+                    std::cout << "Wrong choice, fail number" 
+                    << "\nAuto skip your turn" 
+                    << "\nPlease enter valide number the next time" << std::endl;
+                    for(int i = 0; i < 4; i++)
+                    {
+                        std::cout << 3 - i << std::endl;
+                        std::this_thread::sleep_for(std::chrono::seconds(1));
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            std::cout << "State turn error" << std::endl;
+        }
+    }
+
 }
 
 void Battle::startOne()
 {
     Game game;
+    mode1 = true;
 
     while (ennemy1 ->getHealth() > 0 && player1 ->getHealth() > 0)  //if one of the two is dead, end of loop
     {
@@ -150,9 +222,9 @@ void Battle::startOne()
         mobInfo();
 
         //Player Action
-        std::cout << "Action:   1. Attack   2. Defense   3. Use skill   4. Run  " << "\n";
+        std::cout << "Action:   1. Attack   2. Defense   3. Use skill" << "\n";
         int choice = game.getPlayerChoice();
-        executionTurn(choice);  //for player
+        executionTurn(choice);  
        
         system("cls");  
     }
@@ -167,3 +239,37 @@ void Battle::startOne()
 }
 
 
+void Battle::startTwo()
+{
+    Game game;
+    mode2 = true;
+
+    while(player1 ->getHealth() > 0 && player2 ->getHealth() > 0)
+    {
+    //==================== Player 1 turn ====================
+        playerInfo1();
+        playerInfo2();
+        std::cout << "Player 1 turn \n";
+        player1Turn = true;
+        std::cout << "Action:   1. Attack   2. Defense   3. Use skill" << "\n";
+        int choice = game.getPlayerChoice();
+        executionTurn(choice);  
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(750));
+        system("cls");
+
+    //==================== Player 2 turn ====================
+        playerInfo1();
+        playerInfo2();
+        std::cout << "Player 2 turn \n";
+        player1Turn = false;
+        player2Turn = true; 
+        std::cout << "Action:   1. Attack   2. Defense   3. Use skill" << "\n";
+        choice = game.getPlayerChoice();
+        executionTurn(choice);  
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(750));
+        system("cls");
+    }
+
+}

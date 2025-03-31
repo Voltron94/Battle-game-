@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <memory>
-#include "D:/Code/Code/C++/Projet/battle_game/header/class.hpp"
+#include "D:/Code/Code/C++/Projet/battle_game/header/player.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/game.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/mob.hpp"
 
@@ -28,15 +28,26 @@ class Battle
         //GameMode
         void startOne();
         void startTwo();
-        void startTree();
 
-        //Entity information
-        void playerInfo1();  //Player information, refresh all turn
+        //Get Entity information
+        void playerInfo1(); 
+        void playerInfo2();
         void mobInfo(); 
 
     private:
-        bool plCanAtk; //Boolean, player can use the attack action ?
-        bool enCanAtk; //Mob can attack ?
+        //Attack state
+        bool pl1CanAtk; //Boolean, player  1 can use the attack action ?
+        bool pl2Canatk; 
+        bool enCanAtk; //Ennemy can attack ?
+        //Player Turn State; for mode 2
+        bool player1Turn;
+        bool player2Turn;
+        //State: Battle mode use
+        bool mode1; //Player vs Bot
+        bool mode2; //Player vs Player (local)
+        bool mode3; //Auto 
+        bool mode4; //Online
+
 };
 
 

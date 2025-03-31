@@ -5,21 +5,22 @@
 #include <limits>
 #include <chrono>
 #include <thread>
-#include "D:/Code/Code/C++/Projet/battle_game/header/class.hpp"
+#include "D:/Code/Code/C++/Projet/battle_game/header/player.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/mob.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/Game.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/Battle.hpp"
 
-//=======================================  Demarrage ======================================= 
+//=======================================  Base Fonction ======================================= 
 
 Game::Game(){}
 
-std::string Game::getPlayerName() 
+std::string Game::getPlayerName(int playerNB) 
 { 
     std::string name;
     system("cls");
-    std::cout << "Enter your name :" << std::endl; 
+    std::cout << "Enter your name, player " << playerNB  << " : " << std::endl; 
     std::getline(std::cin, name);
+    system("cls");
     std::cout << "Welcome, " << name << "!" << "\n"  << std::endl;
 
     std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -64,7 +65,7 @@ int Game::getPlayerChoice() {
             // Gestion de l'erreur
             std::cin.clear();  // Reinitialise l'etat d'erreur
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Vide le buffer
-            std::cout << "Erreur : Veuillez entrer un nombre valide.\n";
+            std::cout << "Error : Invalid value.\n";
         }
     }
 }
@@ -91,7 +92,7 @@ void Game::Menu()
         break;
     case 2:
         system("cls");
-        std::cout << "Coming soon" << "\n";
+        modeTwo();
         // std::unique_ptr<Player> player1 = playerCreation("Default", 1);
         // std::unique_ptr<Player> player2 = playerCreation("Default", 2);
         break;
@@ -139,19 +140,20 @@ void Game::start()     //Menu démarage
     }
 }
 
+//=======================================  Character Creation  ======================================= 
 
 std::unique_ptr<Player> Game::playerCreation(std::string name, int playerNB)
 {
     std::cout << "==================================================================================================== \n";
     std::cout << "                                            Battle Game                                              \n";
     std::cout << "====================================================================================================\n"; 
-    name = getPlayerName();
+    name = getPlayerName(playerNB);
     std::cout << name << "are the player" << playerNB << std::endl;
     std::cout << "Card class information: " << "\n";
     card_interface();
     
     std::cout << "Choose your class : " << "\n";
-    int choice = getPlayerChoice(); //ERREUR POTENTIELLE
+    int choice = getPlayerChoice(); 
     
     switch(choice)
     {
@@ -199,6 +201,8 @@ std::unique_ptr<Mob> Game::ennemyCreation()
     
 }
 
+//=======================================  init Mode  ======================================= 
+
 void Game::modeOne()
 {
     try {
@@ -206,30 +210,68 @@ void Game::modeOne()
         auto player1 = playerCreation("Default", 1);
         
         if (!player1) {
-            throw std::runtime_error("Echec de la creation du joueur");
+            throw std::runtime_error("Failure to the creation of the player");
         } else{ 
-            std::cout << "Joueur cree avec succès!\n"; 
+            std::cout << "Player create with succes!\n"; 
         }
 
-        std::cout << "Creation de l'ennemi...\n";
+        std::cout << "Ennemy creation...\n";
         auto mob1 = ennemyCreation();
         
         if (!mob1) {
-            throw std::runtime_error("Echec de la creation de l'ennemi");
+            throw std::runtime_error("Failure to the creation of the player");
         }else { 
-            std::cout << "Ennemi cree avec succès!\n"; 
+            std::cout << "Ennemy create with succes !\n"; 
         }
 
         // Verification finale avant creation du combat
-        std::cout << "Initialisation du combat...\n";
+        std::cout << "Combat initilization...\n";
         Battle battle(std::move(player1), std::move(mob1));
         
         system("cls");
         battle.startOne();
     }
     catch (const std::exception& e) {
-        std::cerr << "ERREUR CRITIQUE: " << e.what() << "\n";
-        std::cerr << "Le programme va se fermer dans :";
+        std::cerr << "CRITICAL ERROR: " << e.what() << "\n";
+        std::cerr << "The program will be close :";
+        for(int i = 0; i < 4; i++)
+        {
+            std::cout << 3 - i << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+    }
+}
+
+void Game::modeTwo()
+{
+    try
+    {
+        std::cout << "Player 1 creation... \n";
+        auto player1 = playerCreation("Default", 1);
+
+        if(!player1)
+        {
+            throw std::runtime_error("Failure to the creation of the player 1");
+        }
+
+        std::cout << "Player 2 creation... \n";
+        auto player2 = playerCreation("Default", 2);
+
+        if(!player2)
+        {
+            throw std::runtime_error("Failure to the creation of the player 1");
+        }
+
+        std::cout << "Combat initilization...\n";   
+        Battle battle(std::move(player1), std::move(player2));
+        
+        system("cls");
+        battle.startTwo();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "CRITICAL ERROR: " << e.what() << "\n";
+        std::cerr << "The program will be close :";
         for(int i = 0; i < 4; i++)
         {
             std::cout << 3 - i << std::endl;
