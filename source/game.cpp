@@ -237,7 +237,7 @@ void Game::modeOne()
         for(int i = 0; i < 4; i++)
         {
             std::cout << 3 - i << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::milliseconds(750));
         }
     }
 }
@@ -275,7 +275,7 @@ void Game::modeTwo()
         for(int i = 0; i < 4; i++)
         {
             std::cout << 3 - i << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::milliseconds(750));
         }
     }
 }

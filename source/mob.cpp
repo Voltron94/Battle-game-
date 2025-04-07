@@ -8,6 +8,6 @@ Mob::Mob(const std::string& _name, int _health, int _attack, int _defense,int _s
 : MobName(_name), health(_health), maxHealth(_health), attack(_attack), defense(_defense), speed(_speed){
 }
 
-Android::Android() : Mob("Android", 50, 50, 50 , 50){}
-Undead::Undead() : Mob("Undead", 50, 50, 50, 50){}
-Goblin::Goblin() : Mob("Goblin", 50, 50, 50, 50) {}
+Android::Android() : Mob("Android", 180, 70, 80, 30){}
+Undead::Undead() : Mob("Undead", 200, 60, 60, 50){}
+Goblin::Goblin() : Mob("Goblin", 140, 65, 40, 90) {}

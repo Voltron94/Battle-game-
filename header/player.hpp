@@ -24,9 +24,15 @@ class Player
         int getSpeed(){return speed;}
         std::string getPlayerClass(){return playerClass;}
 
-        void takeDamage(int damage){ health -= damage;}
+        //Nerf effect
+        // int takeDefenseDamage(int def){ std::cout <<  "Defense are Nerf "; defense -= def; return defense;}
+        int takeDamage(int damage);
+
+        virtual void buffSkill(int choice);
+        virtual void buffSkillList();
 
     protected:
+    //Stats
         std::string name;
         int health;
         int maxHealth;
@@ -34,7 +40,13 @@ class Player
         int defense;
         int speed;
         std::string playerClass;
-        bool turn = false;
+
+        //Skill buff / Berserker
+        bool protectionBuff;
+        int oneUselimit = 0; //Default 0
+        //Skill buff / Saber
+
+        //Skill buff / Rider
 };
 
 
@@ -45,6 +57,8 @@ class Berserker : public Player
         Berserker(const std::string& _name);
 
         void classInfo() override;
+        void buffSkill(int choice ) override;
+        void buffSkillList() override;
 };
 
 class Saber : public Player
@@ -54,6 +68,8 @@ class Saber : public Player
         Saber(const std::string& _name);
 
         void classInfo() override;
+        void buffSkill(int choice) override;
+        void buffSkillList() override;
 };
 
 class Rider : public Player
@@ -63,7 +79,8 @@ class Rider : public Player
         Rider(const std::string& _name);
 
         void classInfo() override;
-
+        void buffSkill(int choice) override;
+        void buffSkillList() override;
 };
 
 //  Class Card

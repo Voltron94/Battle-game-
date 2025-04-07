@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build C++ Project",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++23",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "-Wno-unused-parameter",
+                "-Wno-unused-variable",
+                "-Wno-unused-function",
+                "-g",
+                "-o",
+                "${workspaceFolder}/prog.exe",
+                "${workspaceFolder}/source/player.cpp",
+                "${workspaceFolder}/source/mob.cpp",
+                "${workspaceFolder}/source/game.cpp",
+                "${workspaceFolder}/source/Battle.cpp",
+                "${workspaceFolder}/main.cpp"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compilation du projet C++ avec g++"
+        }
+    ]
+}

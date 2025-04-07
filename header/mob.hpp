@@ -17,8 +17,9 @@ class Mob
         int getAttack(){return attack;}
         int getDefense(){return defense;}
         int getSpeed(){return speed;}
-     //Action
-        void takeDamage(int damage){ health -= damage;}
+     //Nerf / Buff
+        int takeDamage(int damage){ health -= damage; return damage;}
+        int takeDefenseDamage(int def){ std::cout << MobName << " Defense are Nerf "; defense -= def; defense -= def; return defense;}
 
     
     protected:
