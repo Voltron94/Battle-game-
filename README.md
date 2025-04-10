@@ -24,29 +24,29 @@ Player class:
 ===== Berserker =====
 
 Class: Berserker
-Health: 320/320
-Attack: 90
-Defense: 85
-Speed: 25
+Health: 320/320 
+Attack: 90 
+Defense: 85 
+Speed: 25 
 
 ===== Saber =====
 
 Class: Saber
-Health: 275/275
-Attack: 75
-Defense: 75
-Speed: 85
+Health: 275/275 
+Attack: 75 
+Defense: 75 
+Speed: 85 
 
 ===== Rider =====
 
-Class: Rider
-Health: 240/240
-Attack: 65
-Defense: 60
-Speed: 110
+Class: Rider 
+Health: 240/240 
+Attack: 65 
+Defense: 60 
+Speed: 110 
 
 ## Auteurs
-Auteur du jeux :
+Auteur du jeux : 
 * **Voltron** _alias_ 
 
 ## License
