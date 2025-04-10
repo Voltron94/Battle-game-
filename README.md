@@ -9,7 +9,7 @@ Small project for learn, you can use it for whats you wants.
 ### Installation
 
 Download the project and lunch the .exe files in the tool folder. <br>  
-Or [Donwload](https://www.mediafire.com/file/t9n0eiq7uxhn2lk/game.exe/file) here (only the .exe of the game) 
+Or [Download](https://www.mediafire.com/file/t9n0eiq7uxhn2lk/game.exe/file) here (only the .exe of the game) 
 
 ## Create with
 
