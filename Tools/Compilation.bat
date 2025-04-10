@@ -1,6 +1,6 @@
 @echo off
 rem Compilation des fichiers sources avec g++
-g++ -std=c++23 -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -o prog.exe D:\Code\Code\C++\Projet\battle_game\source\player.cpp D:\Code\Code\C++\Projet\battle_game\source\mob.cpp D:\Code\Code\C++\Projet\battle_game\source\game.cpp D:\Code\Code\C++\Projet\battle_game\source\Battle.cpp D:\Code\Code\C++\Projet\battle_game\main.cpp 
+g++ -std=c++23 -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -static -o prog.exe D:\Code\Code\C++\Projet\battle_game\source\player.cpp D:\Code\Code\C++\Projet\battle_game\source\mob.cpp D:\Code\Code\C++\Projet\battle_game\source\game.cpp D:\Code\Code\C++\Projet\battle_game\source\Battle.cpp D:\Code\Code\C++\Projet\battle_game\main.cpp 
 
 rem Exécution du programme compilé
 if exist prog.exe (

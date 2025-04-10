@@ -38,8 +38,7 @@ class Battle
 
         bool mode1; //Player vs Bot
         bool mode2; //Player vs Player (local)
-        bool mode3; //Auto 
-        bool mode4; //Online
+        bool mode3; //Online
 
     private:
         //Attack state

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <crtdbg.h>  
 #include <windows.h>
+#include <cstdlib> 
+#include <ctime> 
 #include "D:/Code/Code/C++/Projet/battle_game/header/player.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/game.hpp"
 #include "D:/Code/Code/C++/Projet/battle_game/header/mob.hpp"

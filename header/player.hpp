@@ -41,12 +41,12 @@ class Player
         int speed;
         std::string playerClass;
 
-        //Skill buff / Berserker
+        //30 % buff protection
         bool protectionBuff;
+        //Limit buff skill
         int oneUselimit = 0; //Default 0
-        //Skill buff / Saber
-
-        //Skill buff / Rider
+        int twoUselimit = 0;
+        int threeUselimit = 0;
 };
 
 

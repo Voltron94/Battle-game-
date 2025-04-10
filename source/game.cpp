@@ -79,7 +79,7 @@ void Game::Menu()
               << "\n===================================== "
               << "\n         Choose your option :         " 
               << "\n\n                                    "
-              << "\n 1. 1 Player       2. 2 Player     3. Auto fight   "<<"\n";
+              << "\n 1. 1 Player       2. 2 Player     3. Online   "<<"\n";
 
     
     int choice = getPlayerChoice();

@@ -83,20 +83,20 @@ void Battle::DefAction()
 
 void Battle::dodge()
 {
+    std::srand(std::time(0));
+
     if(mode1 == true)  
     {
         //Ennemy dodge ?
-        int speedDiff = ennemy1 ->getSpeed() - player1 ->getSpeed();
-        int dodgeChance = (speedDiff / 12) * 100;
-        if(dodgeChance < 0){dodgeChance *= -1;}
-        int randNb = (std::rand() % (100 - 0 + 1));
+        int speed = ennemy1 -> getSpeed();
+        int dodgeKey = (std::rand() % (300 - 0 + 1));
         enDodge = false;    //default init
         
-        if(dodgeChance >= randNb)
+        if(speed > dodgeKey)
         {
             std::cout << ennemy1 ->getName() << " dodge the hit \n";
             enDodge = true;
-            std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
         //Ennemy dodge ? End   
 
@@ -121,12 +121,12 @@ void Battle::attackAction()
             std::cout << "Ennemy take : " << ennemy1 ->takeDamage(finalDamage) << " damage\n";
             
             enDodge = false;
-            std::this_thread::sleep_for(std::chrono::milliseconds(750));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         } 
         else if(enUseDef == !enDodge)
         {
             std::cout << ennemy1 ->getName() << " use the defense action ! He take 0 damage " << "\n"; 
-            std::this_thread::sleep_for(std::chrono::milliseconds(750));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             enUseDef = false;
             pl1CanAtk = true; //Attack condition reset
         }
@@ -148,7 +148,7 @@ void Battle::attackAction()
             int finalDamage = (playerDamage + randomAdd) - FinalDef; 
             std::cout << "The player 2 take :" << player2 ->takeDamage(finalDamage) << " damage\n";
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(750));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             player1Turn = false;
         }else if(player1Turn && !pl1CanAtk) //his turn but can't attack
         {
@@ -167,7 +167,7 @@ void Battle::attackAction()
             int finalDamage = (playerDamage + randomAdd) - FinalDef; 
             std::cout << "The player 1 take : " << player1 ->takeDamage(finalDamage) << " damage \n";
             
-            std::this_thread::sleep_for(std::chrono::milliseconds(750));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             player2Turn = false;
         }else if(player2Turn && !pl2CanAtk) //his turn but can't attack
         {
@@ -181,26 +181,24 @@ void Battle::attackAction()
 
 void Battle::mobTurn()
 {    
+    std::srand(std::time(0));
+
     std::cout << "Mob turn " << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(750));
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
     //Player dodge ?
-    int speedDiff =  player1 ->getSpeed()- ennemy1 ->getSpeed();
-    int dodgeChance = (speedDiff / 19) * 100;
-    if(dodgeChance < 0){dodgeChance *= -1;}
-    int randNb = (std::rand() % (100 - 0 + 1));
+    int speed = player1 -> getSpeed();
+    int dodgeKey = (std::rand() % (300 - 0 + 1));
     player1Dodge = false;    //default init
-        
-    if(dodgeChance >= randNb)
-    {
-        std::cout << player1 ->getName() << " dodge the hit \n";
-        player1Dodge = true;
-        std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    }
-    //Player dodge ? End       
 
-                //Mob Attack
-        //init
+    if(speed > dodgeKey)
+    {
+        player1Dodge = true;
+    }
+    
+    //End       
+
+                //Mob Action
     int ennemyDamage = ennemy1 ->getAttack();
     int PlayerDef = player1 ->getDefense();
 
@@ -218,10 +216,14 @@ void Battle::mobTurn()
         if(enCanAtk && !player1Dodge){
             std::cout << "Mob Attack" << std::endl;
             std::cout << "Player take : " << player1 ->takeDamage(finalDamage) << " damage\n";
-        }else if(player1Dodge)
+            std::this_thread::sleep_for(std::chrono::milliseconds(600));
+        }else if(player1Dodge)  //Player 1 dodge ?
         {
+            std::cout << player1 ->getName() << " dodge the hit \n";
             player1Dodge = false;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
+        
         else{   //!enCanAtk && !player1Dodge
             std::cout << player1 ->getName() << " use the defense action ! He take 0 damage " << "\n";
             enCanAtk = true;
@@ -240,7 +242,7 @@ void Battle::mobTurn()
         break;
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(750));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
 
 //Other
@@ -273,11 +275,7 @@ void Battle::executionTurn(int choice)
             std::cout << "Wrong choice, fail number" 
             << "\nAuto skip your turn" 
             << "\nPlease enter valide number the next time" << std::endl;
-            for(int i = 0; i < 4; i++)
-            {
-                std::cout << 3 - i << std::endl;
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             break;
         }
     }
@@ -303,11 +301,7 @@ void Battle::executionTurn(int choice)
                     std::cout << "Wrong choice, fail number" 
                     << "\nAuto skip your turn" 
                     << "\nPlease enter valide number the next time" << std::endl;
-                    for(int i = 0; i < 4; i++)
-                    {
-                        std::cout << 3 - i << std::endl;
-                        std::this_thread::sleep_for(std::chrono::milliseconds(750));
-                    }
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                     break;
             }
         }
@@ -321,15 +315,16 @@ void Battle::executionTurn(int choice)
                 case 2:
                     DefAction();
                     break;
+                case 3:
+                    player2 ->buffSkillList();
+                    choiceSkill = game.getPlayerChoice();
+                    player2 ->buffSkill(choiceSkill);
+                    break;
                 default:
                     std::cout << "Wrong choice, fail number" 
                     << "\nAuto skip your turn" 
                     << "\nPlease enter valide number the next time" << std::endl;
-                    for(int i = 0; i < 4; i++)
-                    {
-                        std::cout << 3 - i << std::endl;
-                        std::this_thread::sleep_for(std::chrono::milliseconds(750));
-                    }
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                     break;
             }
         }
@@ -350,7 +345,7 @@ void Battle::startOne()
     {
         //Bot Action 
         mobTurn();
-        std::this_thread::sleep_for(std::chrono::milliseconds(750));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         system("cls");
 
         //Show stats in real time
@@ -371,7 +366,7 @@ void Battle::startOne()
         std::cout << "Game over..." << std::endl;
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(750));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
 
 
@@ -389,12 +384,12 @@ void Battle::startTwo()
             playerInfo1();
             playerInfo2();
             std::cout << "Player 1 turn \n";
-            std::cout << "Action:   1. Attack   2. Defense   3. Buff skill   4. Attack/Nerf skill" << "\n";
+            std::cout << "Action:   1. Attack   2. Defense   3. Buff skill  " << "\n";
             player2Turn = false;
             player1Turn = true;
             int choice = game.getPlayerChoice();
             executionTurn(choice);
-            std::this_thread::sleep_for(std::chrono::milliseconds(750));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             system("cls");
         }
 
@@ -410,7 +405,7 @@ void Battle::startTwo()
             player2Turn = true; 
             choice = game.getPlayerChoice();
             executionTurn(choice);  
-            std::this_thread::sleep_for(std::chrono::milliseconds(750));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             system("cls");
         }
     }
