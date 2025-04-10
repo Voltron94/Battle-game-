@@ -79,7 +79,7 @@ void Game::Menu()
               << "\n===================================== "
               << "\n         Choose your option :         " 
               << "\n\n                                    "
-              << "\n 1. 1 Player       2. 2 Player     3. Online   "<<"\n";
+              << "\n 1. 1 Player       2. 2 Player    "<<"\n";
 
     
     int choice = getPlayerChoice();
@@ -96,10 +96,6 @@ void Game::Menu()
         // std::unique_ptr<Player> player1 = playerCreation("Default", 1);
         // std::unique_ptr<Player> player2 = playerCreation("Default", 2);
         break;
-    case 3:
-        system("cls");
-        std::cout << "Coming soon" << "\n";
-        break;
     default:
         throw std::invalid_argument("invalid argument");
         int wait;
@@ -111,32 +107,44 @@ void Game::Menu()
 
 void Game::start()     //Menu démarage
 {
-    int wait;
-    std::cout << "\n=====================================        "
-              << "\n              Battle Game                    "
-              << "\n=====================================        "
-              << "\n          Choose your option :               "  
-              << "\n\n                                           "
-              << "\n  1. Play       2.How to play     3.Option   "<<"\n";
+    while (true)
+    { 
+        system("cls");
+        int wait;
+        std::cout << "\n=====================================        "
+                << "\n              Battle Game                    "
+                << "\n=====================================        "
+                << "\n          Choose your option :               "  
+                << "\n\n                                           "
+                << "\n  1. Play       2.How to play  "<<"\n";
 
-    int choice = getPlayerChoice();
+        int choice = getPlayerChoice();
 
-    switch (choice)
-    {
-    case 1:
-        Menu();
-        break;
-    case 2:
-        std::cout << "Coming soon" << "\n";
-        break;
-    case 3:
-        std::cout << "Coming soon" << "\n";
-        break;
-    default:
-        throw std::invalid_argument("invalid argument");
-        std::cout << "Enter any it touches of your keybord for exit :" ; 
-        std::cin >> wait;
-        break;
+        switch (choice)
+        {
+        case 1:
+            Menu();
+            break;
+        case 2:
+            system("cls");
+            std::cout << "Play turn by turn choose your action \n"
+                      << "Gamemode : \n"
+                      << "1 Player : play with a bot \n"
+                      << "2 Player : play with other player on the same Pc \n\n"
+                      << "Action : \n"
+                      << "Attack : Attack action \n" 
+                      << "Defense : protect the player for the next attack\n"
+                      << "Use Skill : Use the skill of your class for buff your character \n\n";
+
+            std::cout << "Enter any number of your keybord for exit : " ; 
+            std::cin >> wait;
+            break;
+        default:
+            std::cout << " \n";
+            std::cout << "Enter any number of your keybord for exit : " ; 
+            std::cin >> wait;
+            break;
+    }
     }
 }
 
@@ -206,7 +214,7 @@ std::unique_ptr<Mob> Game::ennemyCreation()
 void Game::modeOne()
 {
     try {
-        std::cout << "Creation du joueur...\n";
+        std::cout << "Player creation...\n";
         auto player1 = playerCreation("Default", 1);
         
         if (!player1) {
@@ -225,20 +233,18 @@ void Game::modeOne()
         }
 
         // Verification finale avant creation du combat
-        std::cout << "Combat initilization...\n";
+        std::cout << "Ennemy creation...\n";
         Battle battle(std::move(player1), std::move(mob1));
-        
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
         system("cls");
         battle.startOne();
     }
     catch (const std::exception& e) {
         std::cerr << "CRITICAL ERROR: " << e.what() << "\n";
         std::cerr << "The program will be close :";
-        for(int i = 0; i < 4; i++)
-        {
-            std::cout << 3 - i << std::endl;
-            std::this_thread::sleep_for(std::chrono::milliseconds(750));
-        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(750));
+        
     }
 }
 

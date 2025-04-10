@@ -1,24 +1,15 @@
 # Battle-game-
 RPG game / turn by turn 
 
-# Titre du projet
+# Console Battle game
 _(Small Battle game in C++)_
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
-
+Small project for learn, you can use it for whats you wants.
 
 ### Installation
 
 [Download]()
 
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
-
-
-Ensuite vous pouvez montrer ce que vous obtenez au final...
-
-## Démarrage
-
-Dites comment faire pour lancer votre projet
 
 ## Create with
 
@@ -28,12 +19,35 @@ Dites comment faire pour lancer votre projet
 
 ## Stats/skill of class
 
+Player class:
 
+===== Berserker =====
+
+Class: Berserker
+Health: 320/320
+Attack: 90
+Defense: 85
+Speed: 25
+
+===== Saber =====
+
+Class: Saber
+Health: 275/275
+Attack: 75
+Defense: 75
+Speed: 85
+
+===== Rider =====
+
+Class: Rider
+Health: 240/240
+Attack: 65
+Defense: 60
+Speed: 110
 
 ## Auteurs
 Auteur du jeux :
 * **Voltron** _alias_ 
-
 
 ## License
 

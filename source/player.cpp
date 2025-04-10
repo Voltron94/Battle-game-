@@ -13,7 +13,7 @@ Player::Player(const std::string& _name, int _health, int _attack, int _defense,
 }
 
 //Statistique/Info
-Berserker::Berserker(const std::string& _name) : Player(_name, 320, 90, 45, 45, "Berserker") {}
+Berserker::Berserker(const std::string& _name) : Player(_name, 320, 90, 85, 25, "Berserker") {}
 Rider::Rider(const std::string& _name) : Player(_name, 240, 65, 60, 110, "Rider") {}
 Saber::Saber(const std::string& _name) : Player(_name, 275, 75, 75, 85, "Saber") {}
 
@@ -68,10 +68,8 @@ void Berserker::buffSkill(int choice)
 {
     //Nerf / buff
     int healthNerf = 80;
-    int healthBuff = 20;
-    int attackBuff = 60;
-    int attackNerf = 11;
-    int defenseBuff = 14;
+    int attackBuff = 30;
+    int defenseBuff = 12;
 
     switch (choice)
     {
@@ -83,6 +81,7 @@ void Berserker::buffSkill(int choice)
             std::cout << "health update : " << healthNerf * -1 << "\n";
             attack += attackBuff;
             std::cout << "Attack update : " << attackBuff << "\n";
+            oneUselimit += 1;
             std::this_thread::sleep_for(std::chrono::milliseconds(1500));
         }else{ 
             std::cout << "Limit reached,you can't use more Wild stamina\n"; 
