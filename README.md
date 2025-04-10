@@ -21,33 +21,32 @@ Small project for learn, you can use it for whats you wants.
 
 Player class:
 
-===== Berserker =====
+===== Berserker ===== <br>
 
-Class: Berserker
-Health: 320/320 
-Attack: 90 
-Defense: 85 
-Speed: 25 
+Class: Berserker <br>
+Health: 320/320 <br>
+Attack: 90 <br>
+Defense: 85 <br>
+Speed: 25 <br>
 
-===== Saber =====
+===== Saber ===== <br>
 
-Class: Saber
-Health: 275/275 
-Attack: 75 
-Defense: 75 
-Speed: 85 
+Class: Saber <br> 
+Health: 275/275 <br>
+Attack: 75 <br> 
+Defense: 75 <br>
+Speed: 85 <br>
 
-===== Rider =====
+===== Rider ===== <br>
 
-Class: Rider 
-Health: 240/240 
-Attack: 65 
-Defense: 60 
-Speed: 110 
+Class: Rider <br>
+Health: 240/240 <br>
+Attack: 65 <br>
+Defense: 60 <br>
+Speed: 110 <br>
 
-## Auteurs
-Auteur du jeux : 
-* **Voltron** _alias_ 
+## Author
+* **Voltron** 
 
 ## License
 
